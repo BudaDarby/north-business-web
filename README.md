@@ -7,3 +7,4 @@ Prueba de la lógica: `node break-even/test.js` y `node lib/test-rss.mjs`.
 ## Publicación
 GitHub + Cloudflare Pages (gratis). Cloudflare Pages: sin comando de build, carpeta de salida `/` (raíz del repo).
 Cada cambio que se sube a `main` se publica solo.
+
