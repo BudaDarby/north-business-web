@@ -1,0 +1,20 @@
+const {compute} = require('./calc.js');
+let bad = 0;
+function eq(label, got, want) { const ok = Math.abs(got - want) < 1e-6; if (!ok) bad++; console.log((ok ? 'ok  ' : 'FAIL') + ' ' + label, got, ok ? '' : '(want ' + want + ')'); }
+const cart = {products:[{price:4,cost:1.2,share:100}], fixed:1400, ownerPay:0, days:26, target:1000, expected:800};
+let r = compute(cart);
+eq('contribution', r.contribution, 2.8); eq('break-even cups', r.beUnitsCeil, 500); eq('per day', r.beUnitsPerDay, 20);
+eq('break-even revenue', r.beRevenue, 2000); eq('target cups', r.targetUnits, 858);
+eq('profit at 800', r.profit, 840); eq('margin of safety', r.marginOfSafety, 0.375); eq('profit if -20%', r.profitIfDown20, 392);
+r = compute(Object.assign({}, cart, {ownerPay:1600}));
+eq('with owner pay', r.beUnitsCeil, 1072); eq('per day w/ pay', r.beUnitsPerDay, 42); eq('without pay', r.withoutPay, 500);
+r = compute({products:[{price:4,cost:1.2,share:70},{price:3,cost:1.5,share:30}], fixed:1400, days:26});
+eq('mix contribution', r.contribution, 2.41); eq('mix break-even', r.beUnitsCeil, 581);
+r = compute({products:[{price:40,cost:21.2,share:100}], fixed:1000, days:30});
+eq('store break-even', r.beUnitsCeil, 54);
+r = compute({products:[{price:32,cost:20.96,share:100}], fixed:1000, days:30});
+eq('store with 20% off', r.beUnitsCeil, 91);
+r = compute({products:[{price:5,cost:6,share:100}], fixed:100});
+console.log(r.error === 'no_contribution' ? 'ok   negative contribution flagged' : (bad++, 'FAIL negative contribution'));
+r = compute({products:[]}); console.log(r.error === 'no_products' ? 'ok   empty flagged' : (bad++, 'FAIL empty'));
+console.log(bad ? bad + ' FAILED' : 'ALL PASSED'); process.exit(bad ? 1 : 0);
