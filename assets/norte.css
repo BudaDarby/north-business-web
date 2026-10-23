@@ -46,3 +46,11 @@ svg{width:100%;height:auto;display:block}
 .tag{display:inline-block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--bg);background:var(--copper);border-radius:99px;padding:2px 10px;font-weight:600}
 .tag.soon{background:transparent;color:var(--muted);border:1px solid var(--line)}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+#videos-sec h2{font-size:22px;margin:0 0 12px}
+.vids{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:0 0 40px}
+.vid{padding:0;overflow:hidden;color:var(--text);display:block}
+.vid:hover{border-color:var(--copper);text-decoration:none}
+.vid img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--panel2)}
+.vb{padding:12px 14px}.vb h3{margin:6px 0 4px;font-size:17px;line-height:1.25}.vb p{margin:0;color:var(--muted);font-size:13px}
+#watch .note{display:block;color:var(--text)}
+[hidden]{display:none!important}
